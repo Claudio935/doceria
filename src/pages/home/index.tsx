@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './header';
 import Menu from './menu';
-import Navbar from './navbar';
+import Navbar from '../../components/navbar';
 import Feedback from './feedback';
 import Gallery from './Gallery';
 

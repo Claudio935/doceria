@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavbarModal from './modal';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import { } from '../../'
 
 
 const Navbar = () => {
@@ -10,13 +10,13 @@ const Navbar = () => {
     const location = useLocation();
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const logo = require('../../../assets/image/logo.png')
+    const logo = require('../../assets/image/logo.png')
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const home = require('../../../assets/icones/home.png')
+    const home = require('../../assets/icones/home.png')
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const cart = require('../../../assets/icones/cart.png')
+    const cart = require('../../assets/icones/cart.png')
 
 
     return (

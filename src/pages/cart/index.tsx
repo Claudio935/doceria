@@ -4,7 +4,7 @@ import Section from './section';
 import { Store } from 'redux';
 import { CartState } from '../menu/types/types';
 import { useState } from 'react';
-import Navbar from '../home/navbar';
+import Navbar from '../../components/navbar';
 
 
 const Cart = () => {
@@ -72,7 +72,7 @@ const Cart = () => {
 
 
                 <a href={`http://api.whatsapp.com/send?1=pt_BR&phone=5571981379605&text=${encodeURIComponent(msg)}`}>
-                    <button className='bg-blue-400 hover:bg-red-500 text-white p-4 rounded-lg font-bold'>Encomendar</button>
+                    <span className='bg-blue-400 hover:bg-red-500 text-white p-4 rounded-lg font-bold'>Encomendar</span>
                 </a>
             </div>
 

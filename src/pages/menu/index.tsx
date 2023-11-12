@@ -1,4 +1,4 @@
-import Navbar from '../home/navbar';
+import Navbar from '../../components/navbar';
 import { productCaseirinhos } from './data';
 import ProductList from './product';
 

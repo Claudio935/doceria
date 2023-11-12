@@ -16,7 +16,7 @@ const Header = () => {
                         Deliciosas criações artesanais que encantam seu paladar. Sabores feitos com amor, na nossa confeitaria especial.
                     </h2>
                     <a href={'http://api.whatsapp.com/send?1=pt_BR&phone=5571981379605'}>
-                        <button className='bg-blue-400 p-2 text-white font-bold rounded w-44 md:w-72 hover:bg-green-500'>Faça sua encomenda</button>
+                        <span className='bg-blue-400 p-2 text-white font-bold rounded w-44 md:w-72 hover:bg-green-500'>Faça sua encomenda</span>
                     </a>
                 </div>
                 <div className='hidden md:w-2/5 md:flex'></div>
