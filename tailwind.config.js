@@ -6,6 +6,9 @@ module.exports = {
     extend: {
       spacing: {
         '128': '32rem',
+      },
+      fontFamily: {
+        ['dancing']: ['Dancing Script']
       }
     },
     backgroundImage: {

@@ -1,27 +1,41 @@
-import { ListCategory } from '../../../utils/data';
+
 
 
 export type Product = {
-    id:number;
+    id:string;
     titleProduct: string;
     price: number;
-    quantify: number;
+    quantify?: number;
+    category: string;
 }
 
-export type Props = {
-    titleCategory: ListCategory;
-    sizeProduct: string | undefined;
+export interface productFormData {
+
+    id: string,
+    titleProduct: string,
+    price: number,
+    category: string,
+
+}
+export type MenuProps = {
+    category: string
     products: Product[]
 }
 export interface StateOpenModal extends Product {
     
-    titleCategory:ListCategory;
+    category: string;
 }
+
 export interface CartState {
     cart:{
-     caseirinhos:Product[];
-      brigadeiros:Product[],
-      paes:Product[]
-      sobremesas:Product[]
+     [key:string]:[
+        {
+            id: string,
+            titleProduct: string,
+            price: number,
+            quantify: number,
+          }
+     ];
+     
     }
   }

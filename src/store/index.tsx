@@ -1,29 +1,23 @@
 import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit'
-import { Categorys, ListCategory, listCategory } from '../utils/data'
-import { CartState, Product } from '../pages/menu/types/types'
 
-type InitialValue = Product[] | null
-const getLocalStorage = (key: string) => {
-  const saved = localStorage.getItem(key);
-  const initialValue: InitialValue = saved ? JSON.parse(saved) : null;
-  return !initialValue ? [] : initialValue
-}
+import { CartState } from '../pages/menu/types/types'
+
+
+
+
 
 const initialState: CartState = {
   cart: {
-    caseirinhos: getLocalStorage('caseirinhos'),
-    brigadeiros: getLocalStorage('brigadeiros'),
-    paes: getLocalStorage('paes'),
-    sobremesas: getLocalStorage('sobremesas')
+
   }
 }
 
 interface ProductPayload {
 
-  title: Categorys,
+  category: string,
   content: {
-    id: number,
-    titleProduct: ListCategory,
+    id: string,
+    titleProduct: string,
     price: number,
     quantify: number,
   }
@@ -31,8 +25,8 @@ interface ProductPayload {
 
 }
 interface ProductIdPayload {
-  id: number;
-  category: ListCategory;
+  id: string
+  category: string
 }
 type ActionAddCart = PayloadAction<ProductPayload>
 type incremnetQuantify = PayloadAction<ProductIdPayload>
@@ -44,21 +38,20 @@ const counterSlice = createSlice({
     addCart: {
       reducer(state, action: ActionAddCart) {
         const { cart } = state
+        console.log(action.payload)
+        if (cart[action.payload.category]?.length) {
+          cart[action.payload.category]?.push(action.payload.content)
+          return
+        }
 
-        listCategory.forEach((category) => {
-          if (category === action.payload.title) {
-            cart[category]?.push(action.payload.content)
-          }
-
-
-        })
+        cart[action.payload.category] = [action.payload.content]
 
       }
       ,
-      prepare(title, content) {
+      prepare(category, content) {
         return {
           payload: {
-            title,
+            category,
             content
 
           }
@@ -96,7 +89,7 @@ const counterSlice = createSlice({
 
         cart[category].forEach((product) => {
           if (product.id === id) {
-            const newProduct = { ...product, quantify: product.quantify + 1 }
+            const newProduct = { ...product, quantify: product.quantify - 1 }
             const index = cart[category].indexOf(product)
             cart[category].splice(index, 1, newProduct)
           }
@@ -118,6 +111,10 @@ const counterSlice = createSlice({
       reducer(state, action: incremnetQuantify) {
         const { cart } = state
         const { payload: { category, id } } = action
+        if (cart[category]?.length === 1) {
+          delete cart[category]
+          return
+        }
         cart[category].forEach((product, index) => {
           if (product.id === id) {
             index = cart[category].indexOf(product)

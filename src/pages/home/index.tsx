@@ -9,6 +9,8 @@ import Gallery from './Gallery';
 const Home = () => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const whatsapp = require('../../assets/icones/whatsapp.png')
+
+    console.log(process.env.REACT_APP_API_KEY)
     return (
         <div className='p-7 bg-pack-train bg-no-repeat bg-cover bg-center w-full'>
             <Navbar />
