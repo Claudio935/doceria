@@ -12,7 +12,7 @@ import { store } from './store';
 import Cart from './pages/cart';
 import Login from './pages/login';
 import AddProduto from './pages/addProduto';
-
+import './App.css'
 
 const router = createBrowserRouter([
     {

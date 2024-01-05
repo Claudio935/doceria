@@ -18,9 +18,11 @@ const Gallery = () => {
 
 
     return (
-        <div className="
+        <div
+            className="
+        animate-fade-in
         flex  
-        justify-center   ]
+        justify-center   
         flex-wrap 
         px-2 
         py-10 
@@ -30,7 +32,15 @@ const Gallery = () => {
         bg-white  
         items-center">
             <div className='  w-4/5'>
-                <h1 className="text-4xl text-black font-bold   text-center mb-5 w-full">Galeria</h1>
+                <h1
+                    className="
+                text-4xl 
+                text-black 
+                font-bold   
+                text-center 
+                mb-5 
+                w-full 
+                font-dancing">Galeria</h1>
                 <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
                     <img
                         src={boloBahia}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,6 +8,7 @@ import Navbar from '../../components/navbar';
 import { useProductData } from '../../utils/functions/dataFunctions';
 import { productFormData } from '../menu/types/types';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { DropZone } from '../../components/dropzone';
 
 
 
@@ -16,7 +17,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 const AddProduto = () => {
 
     const [login, setLogin] = useState(true)
-
+    const [image, setImage] = useState<File | null>()
     const { addProductToCart, deleteProduct, productArray } = useProductData()
 
     const auth = getAuth();
@@ -45,8 +46,8 @@ const AddProduto = () => {
             required_error: 'inteiro é requerido',
             // eslint-disable-next-line camelcase
             invalid_type_error: 'valor deve ser um numero inteiro',
-        })
-
+        }),
+        description: z.string()
 
     })
     const { register, handleSubmit, formState: { errors } } =
@@ -55,22 +56,29 @@ const AddProduto = () => {
 
 
 
+    const handleChange = (image: File | null) => {
 
+        setImage(image)
+
+    }
     const onSubmit: SubmitHandler<productFormData> = async (product) => {
+        console.log(product.description)
+        addProductToCart(product, image ? image : null)
 
-        addProductToCart(product)
     }
 
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
+                setLogin(true)
 
-            setLogin(true)
+            } else {
+                setLogin(false)
+            }
+        });
+    }, [])
 
-        } else {
-            setLogin(false)
-        }
-    });
 
     if (!login) {
         return (
@@ -117,7 +125,9 @@ const AddProduto = () => {
             justify-center
             w-full
             h-full
-            md:h-screen'>
+            md:h-screen
+           '>
+
                 <form onSubmit={handleSubmit(onSubmit)} className='
                 flex 
             flex-col 
@@ -125,32 +135,71 @@ const AddProduto = () => {
             justify-center
             h-full
             p-4
-            md:pt-[80px]
+            pt-[80px]
             w-full
-            bg-white'>
+            bg-white
+            overflow-auto'>
                     <h1
-                        className='text-red-400 font-bold text-3xl'>Adicionar Produto</h1>
-                    <label
+                        className='
+                        text-red-400 
+                        font-bold 
+                        text-3xl 
+                        w-full 
+                        text-center
+                        '>Adicionar Produto</h1>
+                    <div className='
+                    flex 
+                    md:flex-row 
+                    flex-col 
+                    items-center 
+                    justify-center
+                    h-full'>
+                        <div className='flex flex-col  items-center 
+            justify-center
+            h-full'>
 
-                        className='text-red-400 font-bold '>Nome do produto</label>
-                    <input
-                        className='border-red-400 border-2 border-solid m-2'
-                        {...register('titleProduct')} ></input>
-                    {errors.category && <span>{errors.category.message}</span>}
-                    <label htmlFor='categoria'
-                        className='text-red-400 font-bold '>Categoria do produto</label>
-                    <input
-                        className='border-red-400 border-2 border-solid m-2'
-                        {...register('category')} ></input>
-                    {errors.category && <span>{errors.category.message}</span>}
-                    <label
-                        className='text-red-400 font-bold '>Valor do produto</label>
-                    <input
-                        className='border-red-400 border-2 border-solid m-2'
-                        {...register('price', { valueAsNumber: true })} ></input>
-                    {errors.price && <span>{errors.price.message}</span>}
+                            <label
 
-                    <button type='submit' className='
+                                className='text-red-400 font-bold '>Nome do produto</label>
+                            <input
+                                className='border-red-400 border-2 border-solid m-2'
+                                {...register('titleProduct')} ></input>
+                            {errors.category && <span>{errors.category.message}</span>}
+                            <label htmlFor='categoria'
+                                className='text-red-400 font-bold '>Categoria do produto</label>
+                            <input
+                                className='border-red-400 border-2 border-solid m-2'
+                                {...register('category')} ></input>
+                            {errors.category && <span>{errors.category.message}</span>}
+                            <label
+                                className='text-red-400 font-bold '>Valor do produto</label>
+                            <input
+                                className='border-red-400 border-2 border-solid m-2'
+                                {...register('price', { valueAsNumber: true })} ></input>
+                            {errors.price && <span>{errors.price.message}</span>}
+                            <div className='m-[10px] w-[240px] '>
+                                <DropZone
+                                    handleChange={handleChange} />
+                            </div>
+                        </div>
+                        <div className='flex flex-col h-full items-center ju'>
+                            <div className='flex flex-col items-center'>
+                                <label
+                                    className='text-red-400 font-bold '>Descrição do produto</label>
+                                <textarea
+                                    cols={6}
+                                    {...register('description')}
+                                    className='
+                            border-red-400 
+                            border-2 
+                            border-solid 
+                            m-2 
+                            min-h-[200px] 
+                            w-[200px]'
+
+                                ></textarea>
+                            </div>
+                            <button type='submit' className='
                 p-2 
                 bg-blue-400 
                 text-white 
@@ -158,10 +207,14 @@ const AddProduto = () => {
                 hover:bg-blue-500
                 text-sm
                 rounded-lg'
-                    >Adicionar Produto</button>
+                            >Adicionar Produto</button>
+                        </div>
+
+                    </div>
+
                 </form>
             </div>
-            <div className='w-full h-full p-5 overflow-y-scroll md:pt-[80px]'>
+            <div className='w-full h-full p-5 overflow-y-auto md:pt-[80px]'>
                 <ProductList productArray={productArray} deleteProduct={deleteProduct} />
             </div>
         </div>

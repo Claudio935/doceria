@@ -8,7 +8,8 @@ const Menu = () => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     return (
         <div
-            className=" 
+            className="
+        animate-fade-in
         flex 
         justify-evenly 
         flex-wrap 
@@ -28,7 +29,8 @@ const Menu = () => {
             <div className='w-full md:w-3/5 flex items-center justify-center flex-col'>
                 <h1 className="
                 text-5xl 
-                md:6x1  
+                md:6x1
+                font-dancing  
                 font-bold   
                 text-center 
                 mb-5 w-full 
@@ -44,7 +46,8 @@ const Menu = () => {
                     mb-10 
                     w-full 
                     text-white 
-                    md:text-black">
+                    md:text-black
+                    font-dancing">
                         Acesse o nosso cardápio e escolha o produto que mais te agrada.
                     </h2>
                     <button className='
@@ -64,3 +67,18 @@ const Menu = () => {
 }
 
 export default Menu;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,20 +9,25 @@ const Card = () => {
         rounded-lg 
         p-10 
         bg-white 
-        w-[230px]  
+        w-[430px]  
         items-center 
         flex 
         justify-start 
-        flex-col  ">
-            <img src={cliente} className="w-10 h-10 rounded-full" />
-            <h4 className="text-[20px] my-5 font-bold">Laís</h4>
+        flex-row  
+        gap-8">
+            <div className="flex flex-col items-center justify-center">
+                <img src={cliente} className="w-20 h-20 rounded-full" />
+                <h4 className="text-[20px]  font-bold">Laís</h4>
+            </div>
             <h5
                 className="text-[12px] 
             text-justify 
-            font-bold"
+            font-bold
+            w-56"
             >Adorei a experiência na empresa,
                 desde o atendimento amigável até os produtos deliciosos.
                 Com certeza voltarei em breve e recomendarei aos meus amigos.</h5>
+
         </div>
     )
 }

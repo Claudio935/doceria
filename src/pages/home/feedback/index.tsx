@@ -19,7 +19,7 @@ const Feedback = () => {
 
 
     return (
-        <div className="d:m-20 m-5  flex items-center relative  justify-center">
+        <div className="d:m-20 m-5  flex items-center relative  justify-center animate-fade-in">
             <button
                 className='
             rounded-full 
@@ -30,7 +30,8 @@ const Feedback = () => {
             text-white 
             h-8 
             w-8 
-            hover:bg-blue-400' onClick={() => scrollToLeftMyRef()}>{'<'}</button>
+            hover:bg-blue-400
+            ' onClick={() => scrollToLeftMyRef()}>{'<'}</button>
             <div
                 ref={refContainerScroll}
                 className='

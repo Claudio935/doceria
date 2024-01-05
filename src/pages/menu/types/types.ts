@@ -7,6 +7,8 @@ export type Product = {
     price: number;
     quantify?: number;
     category: string;
+    description?: string;
+    image: string | null;
 }
 
 export interface productFormData {
@@ -15,11 +17,13 @@ export interface productFormData {
     titleProduct: string,
     price: number,
     category: string,
-
+    image: string | null,
+    description?: string
 }
 export type MenuProps = {
     category: string
     products: Product[]
+    image?: File | null
 }
 export interface StateOpenModal extends Product {
     

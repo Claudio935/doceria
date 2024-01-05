@@ -13,10 +13,6 @@ interface Props {
 const ProductList = ({ deleteProduct, productArray }: Props) => {
 
 
-
-    // useEffect(() => { console.log(productArray) }, [productArray])
-
-
     return (
         <div>
             {productArray
@@ -31,7 +27,12 @@ const ProductList = ({ deleteProduct, productArray }: Props) => {
             {
                 findCategory(productArray).map((item, index) =>
                     <div key={index} className='mb-4'>
-                        <h1 className='text-red-500 font-bold text-4xl mb-4'>{item}</h1>
+                        <h1 className='
+                        text-red-500 
+                        font-dancing 
+                        font-bold 
+                        text-4xl 
+                        mb-4'>{item}</h1>
                         {productArray.map((product, index) => {
                             if (item === product.category) {
                                 return (
@@ -40,18 +41,27 @@ const ProductList = ({ deleteProduct, productArray }: Props) => {
                                     flex-row 
                                     justify-between
                                     mb-2'>
+                                        <img src={
+                                            product.image ?
+                                                product.image : ''}
+                                            className='w-20 h-20 rounded-full'></img>
                                         <p
                                             className='
                                         text-white 
                                         font-bold 
-                                        text-xl'>{product.titleProduct}</p>
+                                        text-xl
+                                        flex
+                                        justify-center
+                                        items-center
+                                        font-dancing '>{product.titleProduct}</p>
                                         <div className='flex flex-row items-center justify-center'>
                                             <p
                                                 className='
                                         text-white 
                                         font-bold 
-                                        text-xl
-                                        mr-2'>{convertNumberToReal(product.price)}</p>
+                                        text-xs
+                                        mr-2
+                                        font-dancing'>{convertNumberToReal(product.price)}</p>
 
                                             <button
                                                 className='
@@ -59,7 +69,6 @@ const ProductList = ({ deleteProduct, productArray }: Props) => {
                                             font-light 
                                             h-5 
                                             w-5 
-                                            bg-red-600 
                                             rounded-full
                                             text-[12px]'
                                                 onClick={() => deleteProduct(product.id)}

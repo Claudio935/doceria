@@ -15,10 +15,19 @@ const Home = () => {
         <div className='p-7 bg-pack-train bg-no-repeat bg-cover bg-center w-full'>
             <Navbar />
             <Header />
-            <div className='mt-7' id="menu">
+            <div className='mt-7 ' id="menu">
+
                 <Menu />
             </div>
-            <div className='mt-7' id="feedback">
+            <div className='mt-7 py-32' id="feedback">
+                <h1
+                    className='
+                text-center 
+                text-black 
+                font-dancing 
+                text-5xl 
+                font-bold
+                '>Feedback de nossos Clientes</h1>
                 <Feedback />
             </div>
             <div className='mt-7' id="galeria">

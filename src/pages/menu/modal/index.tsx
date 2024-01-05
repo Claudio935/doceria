@@ -14,7 +14,7 @@ type DataOpenModa = {
 const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
     const cart = useSelector((state: CartState) => state.cart, shallowEqual)
 
-    const { price, titleProduct, category, id } = dataModal
+    const { price, titleProduct, category, id, image, description } = dataModal
     const navigation = useNavigate()
 
     let minQuantify = 1
@@ -52,27 +52,59 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
     return (
         <>
             {open && <div
-                className='w-96 
+                className='
+            md:w-128 
+            max-h-[75%]
+            w-full
             rounded-lg 
-            h-96 
+            overflow-auto 
             bg-red-400 
             fixed
-            bottom-1/2
+            top-[100px]
             right-1/2 
             translate-x-1/2 
-            translate-y-1/2' >
-                <div className='w-full flex flex-col justify-evenly p-5 h-full items-center'>
-                    <h1 className='font-bold text-white'>{titleProduct}</h1>
-                    <div className='flex flex-row justify-center items-center '>
+           ' >
+                <p
+                    className='
+                    w-full 
+                    text-white 
+                    text-end 
+                    pr-2 
+                    pt-2 
+                    font-dancing
+                    cursor-pointer'
+                    onClick={onClose} >X</p>
+                <div className='w-full flex flex-col justify-evenly p-3 h-full items-center gap-6'>
+                    <h1 className='
+                    font-bold 
+                    text-white 
+                    font-dancing 
+                    text-[50px]
+                    '>{titleProduct}</h1>
+                    <div className='
+                    flex 
+                    flex-col 
+                    items-center 
+                    justify-around
+                    gap-8'>
+                        {image && <img className='w-64 h-64 rounded-lg' src={image}></img>}
+                        {description && <p className='
+                        text-justify 
+                        text-white 
+                        font-dancing
+                        px-10'>{description}</p>}
+                    </div>
+                    <div className='flex flex-row justify-center items-center text-[12px] '>
                         <button onClick={handleDecrement}
-                            className='text-white 
+                            className='
+                            text-white 
                             rounded-full
                             bg-blue-400 w-5 h-5
                             hover:bg-blue-500 
                             flex 
                             items-center 
                             justify-center 
-                            p-[18px] 
+                            p-[14px] 
                             font-bold'>-</button>
                         <h2 className='font-bold text-white mx-5'>Quantidade: {quantifyProduct}</h2>
                         <button onClick={handleIncrement}
@@ -86,23 +118,28 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
                             flex 
                             items-center 
                             justify-center 
-                            p-[18px] 
+                            p-[14px] 
                             font-bold'>+</button>
                     </div>
                     <h2
                         className='
                     font-bold 
-                    text-white'>Valor: {convertNumberToReal(price * quantifyProduct)}</h2>
-                    <button
-                        className='font-bold
-                    text-white text-[12px]
+                    text-white
+                    text-[12px]'>Valor: {convertNumberToReal(price * quantifyProduct)}</h2>
+                    <div className='w-full flex flex-col justify-between items-center gap-3'>
+                        <button
+                            className='
+                    font-bold
+                    text-white 
+                    text-[12px]
                     bg-blue-400 
                     hover:bg-blue-500 
                     p-2 
-                    w-[100px] rounded-lg'
-                        onClick={clickAddProduct}>Adicionar</button>
-                    <button
-                        className='font-bold 
+                    w-[100px] 
+                    rounded-lg'
+                            onClick={clickAddProduct}>Adicionar</button>
+                        <button
+                            className='font-bold 
                     text-white 
                     text-[12px] 
                     bg-green-400 
@@ -110,8 +147,8 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
                     p-2 
                     w-[150px] 
                     rounded-lg'
-                        onClick={onClose}>Continuar comprando</button>
-                    <button className='
+                            onClick={onClose}>Continuar comprando</button>
+                        <button className='
                     border-white
                     border 
                     border-solid 
@@ -123,7 +160,7 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
                     p-2 w-[150px] 
                     rounded-lg' onClick={clickNavigation}>Ir para o Carrinho</button>
 
-
+                    </div>
                 </div>
 
             </div>}

@@ -5,7 +5,8 @@ const Header = () => {
 
     return (
         <header
-            className=" 
+            className="
+        animate-fade-in
         flex 
         justify-start 
         flex-wrap 
@@ -26,11 +27,20 @@ const Header = () => {
                     font-bold   
                     text-center 
                     mb-5 
-                    w-full"
+                    w-full
+                    font-dancing"
                     >Nikki Confeitaria</h1>}
                 <div className='flex flex-col justify-evenly items-center w-full'>
 
-                    <h2 className="text-2xl text-white font-bold  md:w-96 text-center mb-10 w-full">
+                    <h2 className="
+                    text-2xl 
+                    text-white 
+                    font-bold  
+                    md:w-96 
+                    text-center 
+                    mb-10 
+                    w-full
+                    font-dancing">
                         Deliciosas criações artesanais que encantam seu paladar.
                         Sabores feitos com amor, na nossa confeitaria especial.
                     </h2>
