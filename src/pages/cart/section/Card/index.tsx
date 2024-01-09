@@ -73,13 +73,13 @@ const Card = ({ categoryValues }: Props) => {
                                 <button
                                     className='
                                     text-white rounded-full 
-                                    bg-blue-400 w-5 h-5 
+                                    bg-blue-400 w-6 h-6
                                     hover:bg-blue-500 
-                                    flex 
-                                    items-center 
+                                    flex
+                                    flex-row
                                     justify-center
-                                    p-[15px] 
-                                    font-bold'
+                                    font-bold
+                                    text-[14px]'
                                     onClick={() =>
                                         handleDecrement(
                                             product.id,
@@ -93,12 +93,12 @@ const Card = ({ categoryValues }: Props) => {
                                     text-white 
                                     rounded-full 
                                     bg-blue-400 
-                                    w-5 
-                                    h-5 
+                                    w-6
+                                    h-6
                                     hover:bg-blue-500 
                                     items-center 
                                     justify-center 
-                                    p-[15px] 
+                                    text-[11px]
                                     flex
                                     font-bold'>
                                     +</button>

@@ -62,7 +62,9 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
             fixed
             top-[100px]
             right-1/2 
-            translate-x-1/2 
+            translate-x-1/2
+            shadow-2xl
+            shadow-red-400
            ' >
                 <p
                     className='
@@ -99,13 +101,16 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
                             className='
                             text-white 
                             rounded-full
-                            bg-blue-400 w-5 h-5
+                            bg-blue-400 
+                            w-5 
+                            h-5
                             hover:bg-blue-500 
                             flex 
                             items-center 
                             justify-center 
                             p-[14px] 
-                            font-bold'>-</button>
+                            font-bold
+                            text-[15px]'>-</button>
                         <h2 className='font-bold text-white mx-5'>Quantidade: {quantifyProduct}</h2>
                         <button onClick={handleIncrement}
                             className='
@@ -119,7 +124,8 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
                             items-center 
                             justify-center 
                             p-[14px] 
-                            font-bold'>+</button>
+                            font-bold
+                            text-[15px]'>+</button>
                     </div>
                     <h2
                         className='
@@ -158,7 +164,8 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
                     bg-red-400 
                     hover:bg-blue-500 
                     p-2 w-[150px] 
-                    rounded-lg' onClick={clickNavigation}>Ir para o Carrinho</button>
+                    rounded-lg
+                  ' onClick={clickNavigation}>Ir para o Carrinho</button>
 
                     </div>
                 </div>
