@@ -30,7 +30,9 @@
         "spaced-comment": "error",
         "quotes": ["error", "single"],
         "no-duplicate-imports": "error",
-        "max-len": [ "warn", { "code": 100, "ignoreComments": true, "ignoreUrls": true } ]
+        "max-len": [ "warn", { "code": 100, "ignoreComments": true, "ignoreUrls": true } ],
+        "react/prop-types": 0
+          
     },
     "settings": {
         "import/resolver": {

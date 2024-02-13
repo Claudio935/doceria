@@ -5,24 +5,26 @@ const Card = () => {
     const cliente = require('../../../../assets/image/cliente.png')
     return (
         <div
-            className=" 
+            className="
+            shadow-xl
+            shadow-red-300
         rounded-lg 
         p-10 
         bg-white 
-        w-[430px]  
+        w-auto  
         items-center 
         flex 
         justify-start 
-        flex-row  
+        flex-col  
         gap-8">
             <div className="flex flex-col items-center justify-center">
                 <img src={cliente} className="w-20 h-20 rounded-full" />
-                <h4 className="text-[20px]  font-bold">Laís</h4>
+                <h4 className="text-[20px]  font-bold font-dancing">Laís</h4>
             </div>
             <h5
-                className="text-[12px] 
+                className="text-[14px] 
             text-justify 
-            font-bold
+            font-medium
             w-56"
             >Adorei a experiência na empresa,
                 desde o atendimento amigável até os produtos deliciosos.

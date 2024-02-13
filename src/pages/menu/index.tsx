@@ -1,3 +1,4 @@
+import { Loading } from '../../components/loading';
 import Navbar from '../../components/navbar';
 
 import {
@@ -11,33 +12,15 @@ import ProductList from './product';
 
 const Menu = () => {
 
-    const { productArray, loading } = useProductData()
+    const { productArray, loading } = useProductData({})
 
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const fundoMenu = require('../../assets/image/fundoMenu.png')
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const cardapiIcon = require('../../assets/icones/cardapio.png')
+
 
     if (loading) {
-        return (<div
-            className='
-            flex-1 
-            bg-red-400
-            flex
-            flex-col
-            items-center
-            justify-center
-            h-screen
-          '>
-            <img src={cardapiIcon} className='w-10 h-10 animate-pulse'></img>
-            <h1 className='
-            text-white 
-            font-dancing 
-            font-bold 
-            text-2xl 
-            animate-pulse'>Carregando...</h1>
-        </div>)
+        return (<Loading />)
     }
     return (
         <div className="

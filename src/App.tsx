@@ -13,6 +13,7 @@ import Cart from './pages/cart';
 import Login from './pages/login';
 import AddProduto from './pages/addProduto';
 import './App.css'
+import ProductPage from './pages/product';
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         path: '/admin/addProduto',
         element: <AddProduto />,
     },
+    {
+        path: '/product/:productId',
+        element: <ProductPage />
+    }
 
 
 ]);

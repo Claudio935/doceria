@@ -12,8 +12,11 @@ const Gallery = () => {
     const boloKaraoke = require('../../../assets/image/boloKaraoke.png')
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const boloSuper = require('../../../assets/image/boloSuper.png')
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const boloTiktok = require('../../../assets/image/boloTiktok.png')
+
+
+
+
+
 
 
 
@@ -23,45 +26,97 @@ const Gallery = () => {
         animate-fade-in
         flex  
         justify-center   
-        flex-wrap 
-        px-2 
-        py-10 
-        md:m-20 
-        m-5 
-        rounded-lg 
-        bg-white  
-        items-center">
-            <div className='  w-4/5'>
-                <h1
-                    className="
+        flex-wrap
+        rounded-lg
+        items-center
+        bg-red-400
+        p-4
+        ">
+            <div className='w-full flex items-center justify-center flex-col md:flex-row gap-20'>
+                <div className=' flex items-center justify-center flex-col w-full'>
+                    <h1
+                        className="
                 text-4xl 
-                text-black 
+                text-white 
                 font-bold   
                 text-center 
-                mb-5 
                 w-full 
-                font-dancing">Galeria</h1>
-                <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
-                    <img
-                        src={boloBahia}
-                        className='w-32 h-32 md:w-64 md:h-52 rounded-lg hover:scale-150' />
-                    <img
-                        src={boloBarbie}
-                        className='w-32 h-32 md:w-64 md:h-52 rounded-lg hover:scale-150' />
-                    <img
-                        src={boloDoces}
-                        className='w-32 h-32 md:w-64 md:h-52 rounded-lg hover:scale-150' />
-                    <img
-                        src={boloKaraoke}
-                        className='w-32 h-32 md:w-64 md:h-52 rounded-lg hover:scale-150' />
-                    <img
-                        src={boloSuper}
-                        className='w-32 h-32 md:w-64 md:h-52 rounded-lg hover:scale-150' />
-                    <img
-                        src={boloTiktok}
-                        className='w-32 h-32 md:w-64 md:h-52 rounded-lg hover:scale-150' />
+                font-dancing
+                mb-5
+                ">Sabores Encantadores: Uma Jornada Culinária Inesquecível
+                        com Nossa Receita Exclusiva!</h1>
+                    <p className='
+                font-dancing 
+                font-medium 
+                text-white
+                text-2xl 
+                text-center 
+                mb-5'>Na nossa doceria, cada receita é uma história de amor
+                        contada pelos sabores irresistíveis que criamos. Das texturas
+                        suaves aos sabores intensos, mergulhe em um universo de delícias
+                        únicas que tornam cada visita uma experiência memorável. Descubra o
+                        encanto de nossa variedade de doces artesanais, onde cada mordida é uma
+                        celebração do prazer culinário. Deixe-nos ser a doce melodia em seu paladar,
+                        transformando cada momento em uma verdadeira festa para os sentidos.</p>
                 </div>
+                <div className='flex flex-row w-full items-center justify-center gap-4'>
+                    <div className='
+                    grid 
+                    grid-cols-2 
+                    md:grid-cols-3 
+                    gap-2
+                    items-center 
+                    justify-items-start'>
 
+
+                        <img
+                            src={boloBahia}
+                            className='
+                            w-full 
+                            h-w-full 
+                            md:w-full 
+                            md:h-w-full 
+                            rounded-lg 
+                            row-span-2
+                            ' />
+                        <img
+                            src={boloBarbie}
+                            className='
+                            w-full 
+                            h-w-full 
+                            md:w-full 
+                            md:h-w-full  
+                            rounded-lg 
+                            row-span-3' />
+                        <img
+                            src={boloKaraoke}
+                            className='
+                            w-full 
+                            h-w-full 
+                            md:w-full 
+                            md:h-w-full 
+                            rounded-lg 
+                            row-span-2' />
+                        <img
+                            src={boloDoces}
+
+                            className='w-full h-w-full md:w-full md:h-w-full rounded-lg' />
+                        <img
+                            src={boloSuper}
+                            className='
+                            w-full 
+                            h-w-full 
+                            md:w-full 
+                            md:h-w-full 
+                            row-span-2 
+                            rounded-lg' />
+
+
+                    </div>
+                    <div className='flex flex-col items-center justify-center gap-2'>
+
+                    </div>
+                </div>
             </div>
         </div>
     );

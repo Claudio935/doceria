@@ -4,20 +4,25 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { CartState } from '../../menu/types/types';
+import { Input } from '../../../components/input';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../../../utils/data/firebase/config';
+
 
 
 interface ContatoForm {
     nome: string
     bairro: string
-    cep: number
+    cep: string
     email: string
+    telefone: string
 }
 
 const FormCart = () => {
 
 
     const store: Store = useStore()
-    const { cart: { brigadeiros, paes, caseirinhos, sobremesas } }: CartState = store.getState()
+    const { cart }: CartState = store.getState()
 
     const schema = z.object({
 
@@ -37,66 +42,83 @@ const FormCart = () => {
             .min(4, { message: 'A Bairro deve ter no mínimo 4 letras' }),
 
         // eslint-disable-next-line camelcase
-        cep: z.number({
+        cep: z.string({
             // eslint-disable-next-line camelcase
             invalid_type_error: 'valor deve ser um numero inteiro',
-        }).min(8, { message: 'O cep deve ter 8 números sem -' })
-
+        }).regex(/^\d{5}-?\d{3}$/, 'CEP inválido'),
+        telefone: z.string({
+            // eslint-disable-next-line camelcase
+            invalid_type_error: 'valor deve ser um numero inteiro',
+        }).regex(/^9?\d{4}-?\d{4}$/,
+            'Número de telefone inválido, deve ser retirado o código do pais e o de área')
     })
     const { register, handleSubmit, formState: { errors } } =
+
         useForm<ContatoForm>({ resolver: zodResolver(schema) })
-    const onSubmit: SubmitHandler<ContatoForm> = (contato) => {
 
-        let msgBrigadeiro = ''
-        let msgPaes = ''
-        let msgCaseirinhos = ''
-        let msgSobremesas = ''
-        brigadeiros?.forEach(brigadeiro => {
-            // eslint-disable-next-line max-len
-            msgBrigadeiro = msgBrigadeiro + `${brigadeiro.quantify} unidades de ${brigadeiro.titleProduct}/ `
+    const updateFavorite = async (id: string, favorite: number) => {
+        const cardapioRef = doc(db, 'cardapio', id)
+        const newFavorite = favorite + 1
+        try {
+            await updateDoc(cardapioRef, {
+                favorite: newFavorite
+            });
+        }
+        catch (err) {
+            console.log('deu ruim', err)
+        }
+    }
+    const onSubmit: SubmitHandler<ContatoForm> = async (contato) => {
+        const cartKeys = Object.keys(cart)
 
-        });
-        caseirinhos?.forEach(caseiro => {
-            // eslint-disable-next-line max-len
-            msgCaseirinhos = msgCaseirinhos + `${caseiro.quantify} unidades de ${caseiro.titleProduct}/  `
-
-        });
-
-        paes?.forEach(pao => {
-            msgPaes = msgPaes + `${pao.quantify} unidades de ${pao.titleProduct}/  `
-
-        });
-
-        sobremesas?.forEach(sobremesa => {
-            // eslint-disable-next-line max-len
-            msgSobremesas = msgSobremesas + ` ${sobremesa.quantify} unidades de ${sobremesa.titleProduct}/ `
-
-        });
+        if (cartKeys.length === 0) {
+            return
+        }
+        // eslint-disable-next-line max-len
+        let msg = `nome: ${contato.nome}%0Dbairro: ${contato.bairro}%0Dcep: ${contato.cep}%0Demail: ${contato.email}%0DTelefone: ${contato.telefone}%0Dencomenda:`
 
         // eslint-disable-next-line max-len
-        const msg = `lá, meu nome é ${contato.nome} moro no bairro: ${contato.bairro} com cep: ${contato.cep} com email: ${contato.email} e quero encomendar: ${msgBrigadeiro} ${msgPaes} ${msgSobremesas} ${msgCaseirinhos}`
-        console.log(msg, errors)
+        cartKeys.forEach((key) => {
+            cart[key].forEach((product) => {
+                msg = msg + ` ${product.quantify} ${product.titleProduct}, `
+
+                updateFavorite(product.id, product.favorite)
+            })
+            window.location.href = `https://wa.me//5571981379605?text=${msg}`
+
+        })
+
+
+
+
+
+
+
     }
 
 
 
     return (
-        <form className='
+        <div className=' overflow-auto h-full md:fixed 
+        md:bottom-1/2 
+        right-4
+        mt-[80px]
+        md:translate-y-1/2 
+        md:w-1/
+        py-2
+        md:w-1/2
+        pr-2'>
+            <form className='
             flex 
             flex-col 
             items-center 
             justify-center 
-            md:fixed 
-            md:bottom-1/2 
-            right-9 
-            md:translate-y-1/2 
-            md:w-1/2'
-            onSubmit={handleSubmit(onSubmit)}
-        >
-
-
-            <h4
-                className='
+            p-2
+            '
+                onSubmit={handleSubmit(onSubmit)}
+            >
+                <h4
+                    className='
                 font-bold 
                 text-white 
                 text-center 
@@ -105,59 +127,41 @@ const FormCart = () => {
                 mt-16 
                 md:mt-20'> Os preços e quantidades estão certos? Faça sua encomenda!</h4>
 
-            <label className='font-bold text-white ' htmlFor='nome' >
-                Nome:
-            </label>
-            <input
-                {...register('nome')}
-                className='
-                w-full 
-                rounded-lg 
-                p-3 
-                mb-5'
-            >
-            </input>
-            {errors.nome && <span>{errors.nome.message}</span>}
-            <label className='font-bold text-white' htmlFor='bairro'>
-                Bairro:
-            </label>
-            <input
-                {...register('bairro')}
-                className='
-                w-full 
-                rounded-lg 
-                p-3 
-                mb-5'
-            >
-            </input>
-            {errors.bairro && <span>{errors.bairro.message}</span>}
-            <label className='font-bold text-white' htmlFor='bairro'>
-                Cep:
-            </label>
-            <input
-                {...register('cep', { valueAsNumber: true })}
-                className='
-                w-full 
-                rounded-lg 
-                p-3 
-                mb-5'
-            >
-            </input>
-            {errors.email && <span>{errors.email.message}</span>}
-            <label className='font-bold text-white' htmlFor='bairro'>
-                Email:
-            </label>
-            <input
-                {...register('email')}
-                className='
-                w-full 
-                rounded-lg 
-                p-3 
-                mb-5'
-            ></input>
-            <button
-                type={'submit'}
-                className='
+                <Input
+                    color='blue'
+                    label='Nome'
+                    register={register('nome')}
+                    error={errors?.nome?.message}
+                />
+
+                <Input
+                    label='Bairro'
+                    register={register('bairro')}
+                    error={errors?.bairro?.message}
+                />
+
+
+                <Input
+                    label={'cep'}
+                    register={register('cep')}
+                    error={errors?.cep?.message}
+                />
+
+                <Input
+                    label='E-mail'
+                    register={register('email')}
+                    error={errors?.email?.message}
+                    type='email'
+                />
+                <Input
+                    label='Telefone (Whatsapp)'
+                    register={register('telefone')}
+                    error={errors?.telefone?.message}
+                />
+
+                <button
+                    type={'submit'}
+                    className='
                     bg-blue-400 
                     hover:bg-red-500 
                     text-white 
@@ -165,7 +169,8 @@ const FormCart = () => {
                     rounded-lg 
                     font-bold'>Encomendar</button>
 
-        </form>
+            </form>
+        </div>
     )
 }
 

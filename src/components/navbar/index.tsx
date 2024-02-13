@@ -18,7 +18,45 @@ const Navbar = () => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const cart = require('../../assets/icones/cart.png')
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const admin = require('../../assets/icones/admin.png')
 
+    const iconVerify = () => {
+
+        if (location.pathname !== '/cart' && location.pathname !== '/admin/addProduto') {
+            return (
+                <button
+                    className='
+                rounded-full 
+                bg-red-400 
+                h-[40px] 
+                w-[40px] 
+                flex 
+                items-center 
+                justify-center 
+                hover:bg-red-500'
+                    onClick={() => navigation('/cart')}>
+                    <img src={cart} className='h-[20px] mx-10' />
+                </button>
+            )
+        } else {
+            return (
+                <button
+                    className='rounded-full
+                bg-red-400
+                h-[40px]
+                w-[40px] 
+                flex 
+                items-center 
+                justify-center 
+                hover:bg-red-500'
+                    onClick={() => navigation('/')}>
+                    <img src={home} className='h-[20px] mx-10' />
+                </button>
+            )
+
+        }
+    }
     return (
         <nav
             className='
@@ -143,7 +181,7 @@ const Navbar = () => {
                     </div>
                 }
             </div>
-            {location.pathname !== '/cart' ? <button
+            <button
                 className='
                 rounded-full 
                 bg-red-400 
@@ -152,21 +190,15 @@ const Navbar = () => {
                 flex 
                 items-center 
                 justify-center 
-                hover:bg-red-500'
-                onClick={() => navigation('/cart')}>
-                <img src={cart} className='h-[20px] mx-10' />
-            </button> : <button
-                className='rounded-full
-                bg-red-400
-                h-[40px]
-                w-[40px] 
-                flex 
-                items-center 
-                justify-center 
-                hover:bg-red-500'
-                onClick={() => navigation('/')}>
-                <img src={home} className='h-[20px] mx-10' />
-            </button>}
+                hover:bg-red-500
+                mx-5
+                '
+                onClick={() => navigation('/admin/login')}>
+                <img src={admin} className='h-[20px] mx-10' />
+            </button>
+            {iconVerify()}
+
+
         </nav>
     );
 }

@@ -13,15 +13,12 @@ const Menu = () => {
         flex 
         justify-evenly 
         flex-wrap 
-        p-5 
-        m-5 
-        md:m-20 
         border-white 
         border-double 
         border-4 
         rounded-lg 
         bg-red-400 
-        h-[32rem] 
+        h-[32rem]
         items-center 
         bg-[url('../src/assets/image/fundoCardapio.png')] 
         bg-cover">
@@ -40,14 +37,14 @@ const Menu = () => {
                     <h2 className="
                     text-2xl 
                     md:text:4x1  
-                    font-bold  
+                    font-medium  
                     md:w-96 
                     text-center 
                     mb-10 
                     w-full 
                     text-white 
                     md:text-black
-                    font-dancing">
+                    ">
                         Acesse o nosso cardápio e escolha o produto que mais te agrada.
                     </h2>
                     <button className='

@@ -9,6 +9,7 @@ import { useProductData } from '../../utils/functions/dataFunctions';
 import { productFormData } from '../menu/types/types';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { DropZone } from '../../components/dropzone';
+import { Input } from '../../components/input';
 
 
 
@@ -18,7 +19,7 @@ const AddProduto = () => {
 
     const [login, setLogin] = useState(true)
     const [image, setImage] = useState<File | null>()
-    const { addProductToCart, deleteProduct, productArray } = useProductData()
+    const { addProductToCart, deleteProduct, productArray } = useProductData({})
 
     const auth = getAuth();
 
@@ -110,72 +111,68 @@ const AddProduto = () => {
     return (
         <div className="
         bg-red-400 
-        min-h-screen 
         min-w-full 
         flex 
         items-center 
         flex-col
         md:flex-row
-        md:h-screen">
+        md:h-screen
+       ">
             <Navbar />
             <div className='
             flex
             flex-col 
             items-center 
-            justify-center
             w-full
-            h-full
-            md:h-screen
-           '>
-
-                <form onSubmit={handleSubmit(onSubmit)} className='
-                flex 
-            flex-col 
-            items-center 
-            justify-center
-            h-full
-            p-4
-            pt-[80px]
-            w-full
+            mt-[80px]
+            md:mt-0
+            md:w-1/2
+            md:h-[calc(100%_-_80px)]
+            overflow-auto
+            md:absolute
+            md:top-[80px]
+            md:left-0
             bg-white
-            overflow-auto'>
-                    <h1
-                        className='
+            gap-4
+            pb-4
+           '>
+                <h1
+                    className='
                         text-red-400 
                         font-bold 
                         text-3xl 
                         w-full 
                         text-center
+                        mt-4
                         '>Adicionar Produto</h1>
+                <form onSubmit={handleSubmit(onSubmit)} >
+
                     <div className='
                     flex 
-                    md:flex-row 
+                    lg:flex-row 
                     flex-col 
                     items-center 
                     justify-center
-                    h-full'>
+                    h-full
+                    gap-4
+                    '>
                         <div className='flex flex-col  items-center 
             justify-center
             h-full'>
-
-                            <label
-
-                                className='text-red-400 font-bold '>Nome do produto</label>
-                            <input
-                                className='border-red-400 border-2 border-solid m-2'
-                                {...register('titleProduct')} ></input>
+                            <Input
+                                label='Nome do produto'
+                                color='red'
+                                {...register('titleProduct')} />
                             {errors.category && <span>{errors.category.message}</span>}
-                            <label htmlFor='categoria'
-                                className='text-red-400 font-bold '>Categoria do produto</label>
-                            <input
-                                className='border-red-400 border-2 border-solid m-2'
-                                {...register('category')} ></input>
+                            <Input
+                                color='red'
+                                label='Categoria do produto' />
                             {errors.category && <span>{errors.category.message}</span>}
-                            <label
-                                className='text-red-400 font-bold '>Valor do produto</label>
-                            <input
-                                className='border-red-400 border-2 border-solid m-2'
-                                {...register('price', { valueAsNumber: true })} ></input>
+                            <Input
+                                color='red'
+                                label='Valor do produto'
+                                {...register('price', { valueAsNumber: true })} />
+
                             {errors.price && <span>{errors.price.message}</span>}
                             <div className='m-[10px] w-[240px] '>
                                 <DropZone
@@ -193,10 +190,13 @@ const AddProduto = () => {
                             border-red-400 
                             border-2 
                             border-solid 
+                            outline-none
                             m-2 
                             min-h-[200px] 
-                            w-[200px]'
-
+                            w-[200px]
+                            focus:shadow-red-500
+                            focus:shadow-[0px_0px_5px_3px_rgba(0,0,0,0.3)]
+                            '
                                 ></textarea>
                             </div>
                             <button type='submit' className='
@@ -214,7 +214,15 @@ const AddProduto = () => {
 
                 </form>
             </div>
-            <div className='w-full h-full p-5 overflow-y-auto md:pt-[80px]'>
+            <div className='
+            w-full 
+            md:w-1/2 
+            md:h-[calc(100%_-_80px)] 
+            md:absolute 
+            md:top-[80px] 
+            md:right-0 
+            p-5 
+            overflow-y-auto'>
                 <ProductList productArray={productArray} deleteProduct={deleteProduct} />
             </div>
         </div>

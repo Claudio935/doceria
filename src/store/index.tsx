@@ -20,6 +20,7 @@ interface ProductPayload {
     titleProduct: string,
     price: number,
     quantify: number,
+    favorite: number,
   }
 
 

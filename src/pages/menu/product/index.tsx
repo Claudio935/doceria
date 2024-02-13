@@ -1,36 +1,26 @@
 import { convertNumberToReal } from '../../../utils/functions/convetFunctions';
 import ModalMenuProduct from '../modal';
-import { CartState, Product, MenuProps, StateOpenModal } from '../types/types';
+import { MenuProps, StateOpenModal } from '../types/types';
 import { useState } from 'react'
-import { useSelector } from 'react-redux/es/hooks/useSelector';
-import { shallowEqual } from 'react-redux';
+
+import { useNavigate } from 'react-router-dom';
 
 const ProductList = ({ category, products }: MenuProps) => {
-    const cart = useSelector((state: CartState) => state.cart, shallowEqual)
 
-    const [dataModal, setDataModal] = useState<StateOpenModal>({
+    const navigate = useNavigate();
+
+    const [dataModal] = useState<StateOpenModal>({
         id: '',
         titleProduct: '',
         price: 0,
         category,
         quantify: 0,
-        image: null
+        image: null,
+        favorite: 0
     })
     const [openModal, setOpenModal] = useState(false)
 
-    const openModalProduct = (product: Product) => {
 
-        if (cart[category]?.find((item) => item.id === product.id)) {
-            window.alert('Produto já adicionado')
-            return
-        }
-
-        setDataModal(() => ({
-            ...product
-        }))
-        setOpenModal(true)
-
-    }
 
     const closeModal = () => {
         setOpenModal(false)
@@ -69,10 +59,9 @@ const ProductList = ({ category, products }: MenuProps) => {
                     my-5
                     flex-col"
                         key={index} >
-                        <img src={
-                            product.image ?
-                                product.image : ''}
-                            className='w-20 h-20 rounded-full animate-fade-in'></img>
+                        {product.image &&
+                            <img src={product.image}
+                                className='w-20 h-20 rounded-full animate-fade-in'></img>}
                         <h3 className="
                         font-bold 
                         text-xl
@@ -104,11 +93,9 @@ const ProductList = ({ category, products }: MenuProps) => {
                             hover:bg-blue-500 p-2"
                                 onClick={
                                     () =>
-                                        openModalProduct({
-                                            ...product,
-                                            category: category,
+                                        navigate(`/product/${product.id}`)}>adicionar</button>
 
-                                        })}>adicionar</button>
+
                         </div>
                     </div>
                 )

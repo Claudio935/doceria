@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react'
-import { collection, addDoc, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import {
+    collection,
+    addDoc,
+    deleteDoc,
+    doc,
+    getDocs,
+    query,
+    limit,
+    orderBy
+} from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../../utils/data/firebase/config';
-import { Product, productFormData } from '../../pages/menu/types/types';
+import { CartHook, Product, productFormData } from '../../pages/menu/types/types';
+import Compressor from 'compressorjs';
 
 
 
@@ -30,8 +40,21 @@ export const findArrayPerCategory =
         return arrayProduct
     }
 
+export const compressorImage = async (image: File): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+        new Compressor(image, {
+            quality: 0.8,
+            success: (compressedResult) => {
+                resolve(compressedResult as Blob);
+            },
+            error: (error) => {
+                reject(new Error(`Erro ao comprimir a imagem: ${error.message}`));
+            },
+        });
+    });
+};
 
-export const useProductData = () => {
+export const useProductData = ({ numberOfProduct, order, sortBy }: CartHook) => {
     const [loading, setLoading] = useState(false);
     const [productData, setProductData] = useState<productFormData[]>([]);
 
@@ -92,13 +115,15 @@ export const useProductData = () => {
 
 
     };
+
     const uploadPhotos = async (file: File, id: string) => {
 
 
         const storageRef = ref(storage, `image/${id}`);
         try {
-            // 'file' comes from the Blob or File API
-            await uploadBytes(storageRef, file)
+            const imageCompressed = compressorImage(file).then((result) => { return result })
+            console.log(imageCompressed)
+            await uploadBytes(storageRef, await compressorImage(file))
         }
         catch (error) {
             console.error('Erro ao fazer upload da imagem:', error);
@@ -107,11 +132,19 @@ export const useProductData = () => {
     }
 
     const fetchDataProduct = async () => {
+        const cardapioRef = collection(db, 'cardapio')
+
+        const q = numberOfProduct ?
+            query(cardapioRef, orderBy(sortBy ? sortBy : 'titleProduct',
+                order ? order : 'desc'), limit(numberOfProduct)) :
+            query(cardapioRef, orderBy('titleProduct', order ? order : 'desc'));
+
+
 
         setLoading(true);
 
         try {
-            const snapshot = await getDocs(collection(db, 'cardapio'));
+            const snapshot = await getDocs(q);
             const productArray: productFormData[] = [];
 
             if (!snapshot.empty) {
@@ -133,20 +166,12 @@ export const useProductData = () => {
                             } as productFormData);
                         })
                         .catch((error) => {
-                            switch (error.code) {
-                                case 'storage/object-not-found':
-                                    productArray.push({
-                                        ...doc.data(),
-                                        id: doc.id,
-                                        image: null,
-                                    } as productFormData);
-                                    break;
-
-                                default:
-                                    console.log(error.code)
-                                    // Ocorreu um erro desconhecido
-                                    break;
-                            }
+                            productArray.push({
+                                ...doc.data(),
+                                id: doc.id,
+                                image: null,
+                            } as productFormData);
+                            console.log(error.code)
 
                         });
 
@@ -155,6 +180,7 @@ export const useProductData = () => {
                 });
 
                 Promise.all(promises).then(() => {
+                    console.log(productArray)
                     setProductData(productArray);
 
                 });

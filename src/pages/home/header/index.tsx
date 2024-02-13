@@ -10,9 +10,6 @@ const Header = () => {
         flex 
         justify-start 
         flex-wrap 
-        p-5 
-        md:m-20 
-        m-5 
         rounded-lg 
         bg-red-400 
         h-[32rem] 
@@ -35,12 +32,12 @@ const Header = () => {
                     <h2 className="
                     text-2xl 
                     text-white 
-                    font-bold  
+                    font-medium  
                     md:w-96 
                     text-center 
                     mb-10 
                     w-full
-                    font-dancing">
+                    ">
                         Deliciosas criações artesanais que encantam seu paladar.
                         Sabores feitos com amor, na nossa confeitaria especial.
                     </h2>

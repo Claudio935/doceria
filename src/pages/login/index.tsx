@@ -7,6 +7,7 @@ import {
 } from 'firebase/auth';
 import { app } from '../../utils/data/firebase/config';
 import { useNavigate } from 'react-router-dom';
+import { Input } from '../../components/input';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -20,6 +21,7 @@ const Login = () => {
     const handleLogin = () => {
 
         const { email, senha } = selectUser
+
         setPersistence(auth, browserSessionPersistence)
             .then(() => {
                 signInWithEmailAndPassword(auth, email, senha)
@@ -29,11 +31,7 @@ const Login = () => {
                         console.log(user)
                         navigate('/admin/addProduto')
                     })
-                    .catch((error) => {
-                        const errorCode = error.code;
-                        const errorMessage = error.message;
-                        console.log(errorCode, errorMessage)
-                    });
+
             }
             ).catch((error) => {
                 // Handle Errors here.
@@ -49,8 +47,8 @@ const Login = () => {
             <div
                 className="
             bg-white 
-            h-80 
-            w-96 
+            md:w-1/3
+            w-3/4
             flex 
             items-center 
             justify-evenly 
@@ -59,34 +57,25 @@ const Login = () => {
             p-11 
             shadow-md 
             shadow-slate-950">
-                <label
-                    htmlFor="email">email</label>
-                <input
-                    name="email"
-                    className="
-                border-2 
-                border-black 
-                rounded-lg 
-                p-1"
+                <Input
+                    label='E-mail'
+                    color='red'
                     onChange={(event) =>
-                        setSelectUser((user) => ({ ...user, email: event.target.value }))}></input>
-                <label htmlFor="senha">Senha</label>
-                <input
+                        setSelectUser((user) => ({ ...user, email: event.target.value }))}></Input>
+
+                <Input
+                    label='Senha'
+                    color='red'
                     name="senha"
-                    className="
-                border-2  
-                border-black 
-                rounded-lg 
-                p-1"
                     type='password'
                     onChange={(event) =>
-                        setSelectUser((user) => ({ ...user, senha: event.target.value }))}></input>
+                        setSelectUser((user) => ({ ...user, senha: event.target.value }))}></Input>
                 <button
                     type="submit"
                     onClick={handleLogin}
                     className='
-                bg-red-400 
-                hover:bg-red-500 
+                bg-blue-400 
+                hover:bg-blue-500 
                 rounded-lg 
                 text-white 
                 font-bold 

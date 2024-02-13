@@ -19,13 +19,14 @@ const Feedback = () => {
 
 
     return (
-        <div className="d:m-20 m-5  flex items-center relative  justify-center animate-fade-in">
+        <div className="  flex items-center relative  justify-center animate-fade-in md:px-20">
             <button
                 className='
             rounded-full 
-            absolute 
+            absolute
+            md:ml-16
             top-[50%]  
-            left-0 
+            left-0
             bg-red-400 
             text-white 
             h-8 
@@ -41,7 +42,11 @@ const Feedback = () => {
                 mx-8  
                 overflow-x-hidden 
                 gap-2 
-                items-center'>
+                items-center
+                [&>*:nth-child(odd)]:bg-red-400
+                [&>*:nth-child(odd)]:text-white
+                py-10
+                '>
                 <Card />
                 <Card />
                 <Card />
@@ -54,6 +59,7 @@ const Feedback = () => {
             rounded-full 
             absolute 
             right-0 
+            md:mr-16
             top-[50%] 
             bg-red-400 
             text-white 

@@ -22,7 +22,7 @@ const ProductList = ({ deleteProduct, productArray }: Props) => {
                 text-white 
                 font-bold 
                 text-xl
-                '>Nenhum product adicionado</p>
+                '>Nenhum produto adicionado</p>
                 </div>}
             {
                 findCategory(productArray).map((item, index) =>

@@ -54,21 +54,30 @@ const Card = ({ categoryValues }: Props) => {
                         <div
                             key={index}
                             className='
-                        flex ]
+                        flex 
                         flex-col 
                         items-center 
                         justify-center 
                         bg-white 
-                        rounded-xl 
-                        w-80 
-                        h-40 
-                        m-2 '>
-                            <h1 className='font-bold'>{product.titleProduct}</h1>
+                        rounded-xl  
+                        m-2
+                        gap-2 
+                        p-10
+                        shadow-md
+                        shadow-black
+                       '>
+                            <h1 className='font-bold text-[18px]'>{product.titleProduct}</h1>
                             <h1
                                 className='
                             font-bold 
-                            text-red-600'>
-                                Preço: {convertNumberToReal(product.price * product.quantify)}</h1>
+                            text-red-400  text-[12px]'>
+                                Preço Unitário: {convertNumberToReal(product.price)}</h1>
+                            <h1
+                                className='
+                            font-bold 
+                            text-red-600
+                            text-[12px]'>
+                                Total: {convertNumberToReal(product.price * product.quantify)}</h1>
                             <div className='flex flex-row justify-center items-center '>
                                 <button
                                     className='
@@ -86,7 +95,11 @@ const Card = ({ categoryValues }: Props) => {
                                             product.quantify,
                                             categoryValues)}>
                                     -</button>
-                                <h1 className='m-2'>Quantidade: {product.quantify}</h1>
+                                <h1
+                                    className='
+                                m-2 
+                                text-[12px] 
+                                font-bold'>Quantidade: {product.quantify}</h1>
                                 <button
                                     onClick={() => handleIncrement(product.id)}
                                     className='
@@ -112,8 +125,10 @@ const Card = ({ categoryValues }: Props) => {
                                 flex 
                                 items-center 
                                 justify-center  
-                                font-bold p-1 
-                                hover:bg-red-600'
+                                font-bold 
+                                hover:bg-red-600
+                                text-[12px]
+                                p-2'
                             >Deletar</button>
 
                         </div>
