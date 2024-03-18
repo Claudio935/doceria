@@ -1,11 +1,21 @@
 import { convertNumberToReal } from '../../../utils/functions/convetFunctions';
 import ModalMenuProduct from '../modal';
-import { MenuProps, StateOpenModal } from '../types/types';
+import { Product, StateOpenModal } from '../types/types';
 import { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom';
 
-const ProductList = ({ category, products }: MenuProps) => {
+interface MenuProps {
+    category: string
+    products: Product[]
+    image?: File | null
+    handleMouseIn: (image: string | null) => void
+}
+
+const ProductList = ({ category, products, handleMouseIn }: MenuProps) => {
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const divisor = require('../../../assets/image/divisor.png')
 
     const navigate = useNavigate();
 
@@ -30,28 +40,43 @@ const ProductList = ({ category, products }: MenuProps) => {
 
     return (
         <div
-            className="rounded-lg text-center flex items-center flex-col px-5"
+            className="
+            rounded-lg 
+            text-center 
+            flex 
+            items-center 
+            flex-col 
+            px-5
+            "
         >
-            <div className=' w-full
-            '>
+            <div className='w-full'>
                 <h1
                     className="
                     font-bold 
-                    text-4xl 
-                    text-red-400 
+                    w-fit
+                    text-3xl 
+                    text-white
                     font-dancing 
-                    text-left">{category}</h1>
+                    text-left
+                    bg-red-400 
+                    rounded-full 
+                    px-8
+                    py-2 
+                    m-2
+                    ">{category}</h1>
 
             </div>
             {products.map((product, index) => {
                 return (
 
-                    <div className="
+                    <div
+                        onMouseOver={() => handleMouseIn(product.image)}
+                        className="
                     flex 
                     md:flex-row 
                     justify-between 
                     items-center 
-                    w-full 
+                    w-full
                     hover:bg-blue-400 
                     py-2 
                     md:px-2 
@@ -59,29 +84,42 @@ const ProductList = ({ category, products }: MenuProps) => {
                     my-5
                     flex-col"
                         key={index} >
-                        {product.image &&
-                            <img src={product.image}
-                                className='w-20 h-20 rounded-full animate-fade-in'></img>}
-                        <h3 className="
-                        font-bold 
-                        text-xl
+
+                        <div
+                            className='
+                            flex 
+                            flex-col
+                            w-96 
+                            items-center 
+                            justify-start'>
+                            <h3 className="
+                        text-base
                         text-start 
-                        font-dancing
+                        
                         ">{product.titleProduct}</h3>
+                            <p
+                                className=' 
+                                text-[9px] 
+                                text-justify 
+                                leading-3'>{product.description}</p>
+
+                        </div>
                         <div className="
                         flex 
                         md:flex-row
                         flex-col
-                        justify-between 
+                        justify-around
                         items-center 
                         w-3/5 
                         text-sm">
+
                             <h3
                                 className="
                             text-red-400 
                             font-bold 
-                            font-dancing
-                            text-sm">{convertNumberToReal(product.price)}</h3>
+                            text-lg
+                            ">{convertNumberToReal(product.price)}</h3>
+
                             <button
                                 className="
                             rounded-lg 
@@ -100,8 +138,7 @@ const ProductList = ({ category, products }: MenuProps) => {
                     </div>
                 )
             })}
-            <hr
-                className=' w-4/5 m-10'></hr>
+            <img src={divisor} className='w-52 h-28' />
             <ModalMenuProduct open={openModal} dataModal={dataModal} onClose={() => closeModal()} />
         </div>
 

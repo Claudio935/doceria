@@ -1,34 +1,38 @@
+import { commentData } from '../../../menu/types/types'
 
 
-const Card = () => {
+const Card: React.FC<commentData> = ({ image, name, comment }) => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const cliente = require('../../../../assets/image/cliente.png')
+    const userImageNotFound = require('../../../../assets/image/userComment.png')
     return (
         <div
             className="
             shadow-xl
             shadow-red-300
-        rounded-lg 
-        p-10 
-        bg-white 
-        w-auto  
-        items-center 
-        flex 
-        justify-start 
-        flex-col  
-        gap-8">
+            rounded-lg 
+            p-10 
+            bg-white 
+            w-auto  
+            items-center 
+            flex 
+            justify-start 
+            flex-col  
+            gap-8
+            h-96">
             <div className="flex flex-col items-center justify-center">
-                <img src={cliente} className="w-20 h-20 rounded-full" />
-                <h4 className="text-[20px]  font-bold font-dancing">Laís</h4>
+                {typeof image === 'string' ?
+                    <img src={image} className="w-16 h-16 rounded-full object-cover mb-5" /> :
+                    <img
+                        src={userImageNotFound}
+                        className="w-16 h-16 rounded-full object-cover mb-5" />}
+                <h4 className="text-[20px]  font-bold font-dancing">{name}</h4>
             </div>
             <h5
                 className="text-[14px] 
             text-justify 
             font-medium
             w-56"
-            >Adorei a experiência na empresa,
-                desde o atendimento amigável até os produtos deliciosos.
-                Com certeza voltarei em breve e recomendarei aos meus amigos.</h5>
+            >{comment}</h5>
 
         </div>
     )

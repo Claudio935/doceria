@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { CartState, productFormData } from '../menu/types/types';
 import { calcNewPrice } from '../../utils/functions/convetFunctions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { addCart } from '../../store';
+import { addCart } from '../../store/cart';
 import Navbar from '../../components/navbar';
 import { Loading } from '../../components/loading';
 
@@ -29,8 +29,9 @@ const ProductPage = () => {
             setLoading(false)
             return { ...docSnap.data(), image: downloadUrl } as productFormData;
         }
-        return undefined
         setLoading(false)
+        return undefined
+
     }
     useEffect(() => {
         getProductId().then((data) => setDataProduct(data))
@@ -38,12 +39,7 @@ const ProductPage = () => {
 
 
 
-
-
-
-
-
-    const cart = useSelector((state: CartState) => state.cart, shallowEqual)
+    const cart = useSelector((state: CartState) => state, shallowEqual)
 
 
     const navigation = useNavigate()
@@ -73,11 +69,8 @@ const ProductPage = () => {
                 window.alert('Produto já adicionado')
                 return
             }
-
-
-
         }
-        console.log(productId)
+
         dispatch(addCart(
             category, { price, titleProduct, quantify: quantifyProduct, id: productId, favorite }))
         navigation('/cart')
@@ -106,7 +99,7 @@ const ProductPage = () => {
                         {dataProduct?.image &&
                             <img
                                 src={dataProduct.image}
-                                className='h-96 w-96 rounded-lg'></img>}
+                                className='h-96 w-96 rounded-lg bg-cover'></img>}
                     </div>
                     <div
                         className='
@@ -114,10 +107,9 @@ const ProductPage = () => {
             flex-col  
             items-center 
             gap-2 
-            font-dancing 
             text-white
             p-20'>
-                        <h1 className='text-3xl'>{dataProduct?.titleProduct}</h1>
+                        <h1 className='text-3xl font-dancing '>{dataProduct?.titleProduct}</h1>
                         <h3 className='text-1xl '>{dataProduct?.description}</h3>
                         <p className='font-bold'>
                             {calcNewPrice(quantifyProduct, dataProduct?.price)}</p>
@@ -167,7 +159,6 @@ const ProductPage = () => {
                     bg-blue-400 
                     hover:bg-blue-500 
                     p-2 
-                    
                     rounded-lg'
                                 onClick={clickAddProduct}>Adicionar</button>
                             <button className='
@@ -184,9 +175,6 @@ const ProductPage = () => {
                   ' onClick={clickNavigationMenu}>Ir para o Menu</button>
 
                         </div>
-
-
-
                     </div>
                 </>
             }

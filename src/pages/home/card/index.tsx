@@ -16,8 +16,6 @@ const CardProduct = () => {
         <div className='md:flex  justify-center rounded-lg gap-10 grid md:grid-cols-3 grid-cols-2'>
             {productArray.map((product) => {
                 return (
-
-
                     <div
                         onClick={() => navigation(`/product/${product.id}`)}
                         key={product.id}

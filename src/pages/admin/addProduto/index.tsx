@@ -4,15 +4,12 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import ProductList from './poductList';
-import Navbar from '../../components/navbar';
-import { useProductData } from '../../utils/functions/dataFunctions';
-import { productFormData } from '../menu/types/types';
+import Navbar from '../../../components/navbar';
+import { useProductData } from '../../../utils/functions/dataFunctions';
+import { productFormData } from '../../menu/types/types';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { DropZone } from '../../components/dropzone';
-import { Input } from '../../components/input';
-
-
-
+import { DropZone } from '../../../components/dropzone';
+import { Input } from '../../../components/input';
 
 
 const AddProduto = () => {
@@ -111,14 +108,14 @@ const AddProduto = () => {
     return (
         <div className="
         bg-red-400 
+        min-h-screen 
         min-w-full 
         flex 
-        items-center 
+        items-center
+        justify-center 
         flex-col
-        md:flex-row
-        md:h-screen
-       ">
-            <Navbar />
+        ">
+
             <div className='
             flex
             flex-col 
@@ -162,24 +159,29 @@ const AddProduto = () => {
                             <Input
                                 label='Nome do produto'
                                 color='red'
-                                {...register('titleProduct')} />
-                            {errors.category && <span>{errors.category.message}</span>}
+                                register={register('titleProduct')}
+                                error={errors.titleProduct?.message}
+                            />
+
                             <Input
                                 color='red'
-                                label='Categoria do produto' />
-                            {errors.category && <span>{errors.category.message}</span>}
+                                label='Categoria do produto'
+                                register={register('category')}
+                                error={errors.category?.message} />
+
                             <Input
                                 color='red'
                                 label='Valor do produto'
-                                {...register('price', { valueAsNumber: true })} />
+                                register={register('price', { valueAsNumber: true })}
+                                error={errors.price?.message} />
 
-                            {errors.price && <span>{errors.price.message}</span>}
+
                             <div className='m-[10px] w-[240px] '>
                                 <DropZone
                                     handleChange={handleChange} />
                             </div>
                         </div>
-                        <div className='flex flex-col h-full items-center ju'>
+                        <div className='flex flex-col h-full items-center '>
                             <div className='flex flex-col items-center'>
                                 <label
                                     className='text-red-400 font-bold '>Descrição do produto</label>
@@ -192,6 +194,8 @@ const AddProduto = () => {
                             border-solid 
                             outline-none
                             m-2 
+                            p-2
+                            rounded-lg
                             min-h-[200px] 
                             w-[200px]
                             focus:shadow-red-500
@@ -221,11 +225,12 @@ const AddProduto = () => {
             md:absolute 
             md:top-[80px] 
             md:right-0 
-            p-5 
+            md:p-5 
+            pl-12
             overflow-y-auto'>
                 <ProductList productArray={productArray} deleteProduct={deleteProduct} />
             </div>
-        </div>
+        </ div>
     )
 }
 

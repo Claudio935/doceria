@@ -1,7 +1,7 @@
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { CartState } from '../../../menu/types/types';
+import { Store } from '../../../menu/types/types';
 import { convertNumberToReal } from '../../../../utils/functions/convetFunctions';
-import { deleteProduct, incrementQuantify, decrementQuantify } from '../../../../store';
+import { deleteProduct, incrementQuantify, decrementQuantify } from '../../../../store/cart';
 import { useEffect } from 'react';
 
 
@@ -12,7 +12,9 @@ interface Props {
 
 const Card = ({ categoryValues }: Props) => {
 
-    const cart = useSelector((state: CartState) => state.cart, shallowEqual)
+    const { cart } = useSelector((state: Store) => state, shallowEqual)
+
+    console.log(categoryValues)
 
     const dispatch = useDispatch()
 

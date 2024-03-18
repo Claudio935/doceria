@@ -23,7 +23,7 @@ const Navbar = () => {
 
     const iconVerify = () => {
 
-        if (location.pathname !== '/cart' && location.pathname !== '/admin/addProduto') {
+        if (location.pathname !== '/cart' && !location.pathname.includes('/admin')) {
             return (
                 <button
                     className='
@@ -63,7 +63,7 @@ const Navbar = () => {
         fixed h-20 
         top-0 
         left-0 
-        z-10 
+        z-20 
         w-full 
         bg-white 
         p-5 flex 
@@ -163,18 +163,6 @@ const Navbar = () => {
                                         text-red-400 
                                         hover:text-blue-400">FeedBack</a>
                                     </li>
-                                    <li>
-                                        <a
-                                            href="#galeria"
-                                            className="
-                                        block 
-                                        py-2 
-                                        pl-3 
-                                        pr-4 
-                                        text-red-400 
-                                        hover:text-blue-400">Galeria</a>
-                                    </li>
-
                                 </ul>
                             </div>
                         </div>

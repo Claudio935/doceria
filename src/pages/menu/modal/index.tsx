@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CartState, StateOpenModal } from '../types/types'
 import { convertNumberToReal } from '../../../utils/functions/convetFunctions'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { addCart } from '../../../store'
+import { addCart } from '../../../store/cart'
 import { useNavigate } from 'react-router-dom'
 
 type DataOpenModa = {
@@ -12,7 +12,7 @@ type DataOpenModa = {
 }
 
 const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
-    const cart = useSelector((state: CartState) => state.cart, shallowEqual)
+    const cart = useSelector((state: CartState) => state, shallowEqual)
 
     const { price, titleProduct, category, id, image, description } = dataModal
     const navigation = useNavigate()
@@ -35,7 +35,7 @@ const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
     }
     const clickAddProduct = () => {
         if (cart[category]) {
-            console.log(cart[category], 'oi')
+
             if (cart[category].find((item) => item.id === id)) {
                 window.alert('Produto já adicionado')
                 return

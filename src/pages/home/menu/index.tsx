@@ -20,7 +20,7 @@ const Menu = () => {
         bg-red-400 
         h-[32rem]
         items-center 
-        bg-[url('../src/assets/image/fundoCardapio.png')] 
+bg-[url('../src/assets/image/fundoCardapio.png')] 
         bg-cover">
             <div className="hidden md:w-2/5 md:flex"></div>
             <div className='w-full md:w-3/5 flex items-center justify-center flex-col'>

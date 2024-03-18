@@ -2,6 +2,7 @@
 import Section from './section';
 import Navbar from '../../components/navbar';
 import FormCart from './form';
+import { ModalError } from '../../components/modalError';
 
 
 const Cart = () => {
@@ -13,7 +14,7 @@ const Cart = () => {
             <Navbar />
             <Section />
             <FormCart />
-
+            <ModalError />
         </div>
     )
 }

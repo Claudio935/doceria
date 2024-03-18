@@ -22,13 +22,16 @@ export interface productFormData {
     description?: string
     favorite: number
 }
+
+export interface commentData {
+    id: string,
+    name:string;
+    comment: string;
+    job?: string;
+    image?: string | File | null;
+}
 export type productSelected = productFormData | undefined
 
-export type MenuProps = {
-    category: string
-    products: Product[]
-    image?: File | null
-}
 export interface StateOpenModal extends Product {
     
     category: string;
@@ -39,8 +42,14 @@ export interface CartHook {
     order?: 'asc' | 'desc'
 
 }
+export interface CommentHook {
+    numberOfComment?: number, 
+    sortBy?: string,
+    order?: 'asc' | 'desc'
+
+}
 export interface CartState {
-    cart:{
+   
      [key:string]:[
         {
             id: string,
@@ -51,5 +60,27 @@ export interface CartState {
           }
      ];
      
-    }
+    
   }
+
+  export interface Store {
+   cart:{
+    [key:string]:[
+        {
+            id: string,
+            titleProduct: string,
+            price: number,
+            quantify: number,
+            favorite: number,
+          }
+     ];
+
+   },
+   alert:{
+    message: string,
+    open: boolean
+   }
+   
+    
+   
+ }

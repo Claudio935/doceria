@@ -1,12 +1,14 @@
-import { useStore } from 'react-redux';
-import { Store } from 'redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { CartState } from '../../menu/types/types';
+import { Store } from '../../menu/types/types';
 import { Input } from '../../../components/input';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../utils/data/firebase/config';
+import { openModal } from '../../../store/alert';
+
+
 
 
 
@@ -16,13 +18,16 @@ interface ContatoForm {
     cep: string
     email: string
     telefone: string
+    data: string
 }
 
 const FormCart = () => {
 
+    const dispatch = useDispatch()
 
-    const store: Store = useStore()
-    const { cart }: CartState = store.getState()
+
+
+    const cart = useSelector((state: Store) => state.cart, shallowEqual)
 
     const schema = z.object({
 
@@ -50,7 +55,8 @@ const FormCart = () => {
             // eslint-disable-next-line camelcase
             invalid_type_error: 'valor deve ser um numero inteiro',
         }).regex(/^9?\d{4}-?\d{4}$/,
-            'Número de telefone inválido, deve ser retirado o código do pais e o de área')
+            'Número de telefone inválido, deve ser retirado o código do pais e o de área'),
+        data: z.string().min(1, { message: 'valor de data é requerido!' })
     })
     const { register, handleSubmit, formState: { errors } } =
 
@@ -72,13 +78,19 @@ const FormCart = () => {
         const cartKeys = Object.keys(cart)
 
         if (cartKeys.length === 0) {
+            console.log(cart)
+            dispatch(openModal('Não existe nenhum produto no carrinho!'))
             return
         }
+
+        const dataEncomenda = contato.data;
+        const dataEncomendaFormated = dataEncomenda.split('-').reverse().join('/');
         // eslint-disable-next-line max-len
-        let msg = `nome: ${contato.nome}%0Dbairro: ${contato.bairro}%0Dcep: ${contato.cep}%0Demail: ${contato.email}%0DTelefone: ${contato.telefone}%0Dencomenda:`
+        let msg = `nome: ${contato.nome}%0Dbairro: ${contato.bairro}%0Dcep: ${contato.cep}%0Demail: ${contato.email}%0DTelefone: ${contato.telefone}%0DData da encomenda: ${dataEncomendaFormated}%0Dencomenda:`
 
         // eslint-disable-next-line max-len
         cartKeys.forEach((key) => {
+            console.log(key)
             cart[key].forEach((product) => {
                 msg = msg + ` ${product.quantify} ${product.titleProduct}, `
 
@@ -88,15 +100,7 @@ const FormCart = () => {
 
         })
 
-
-
-
-
-
-
     }
-
-
 
     return (
         <div className=' overflow-auto h-full md:fixed 
@@ -157,6 +161,12 @@ const FormCart = () => {
                     label='Telefone (Whatsapp)'
                     register={register('telefone')}
                     error={errors?.telefone?.message}
+                />
+                <Input
+                    label='Data da encomenda'
+                    register={register('data')}
+                    error={errors?.data?.message}
+                    type='date'
                 />
 
                 <button

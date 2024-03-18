@@ -8,7 +8,7 @@ export const Loading = () => {
         <div
             className='
             flex-1 
-            bg-white
+            bg-transparent
             flex
             flex-col
             items-center

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { findCategory } from '../../../utils/functions/dataFunctions';
-import { productFormData } from '../../menu/types/types';
-import { convertNumberToReal } from '../../../utils/functions/convetFunctions';
+import { findCategory } from '../../../../utils/functions/dataFunctions';
+import { productFormData } from '../../../menu/types/types';
+import { convertNumberToReal } from '../../../../utils/functions/convetFunctions';
 
 interface Props {
     deleteProduct: (id: string) => Promise<void>,

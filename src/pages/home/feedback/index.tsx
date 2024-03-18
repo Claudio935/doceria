@@ -1,9 +1,12 @@
 import { useRef } from 'react'
 import Card from './card'
+import { useCommentData } from '../../../utils/functions/dataFunctions';
 
 
 const Feedback = () => {
     const refContainerScroll = useRef<HTMLDivElement>(null);
+
+    const { commentArray } = useCommentData({})
 
     const scrollToLeftMyRef = () => {
 
@@ -47,12 +50,17 @@ const Feedback = () => {
                 [&>*:nth-child(odd)]:text-white
                 py-10
                 '>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {
+                    commentArray.map((comment) => {
+                        return (<Card
+                            id={comment.id}
+                            key={comment.id}
+                            comment={comment.comment}
+                            image={comment.image}
+                            name={comment.name}
+                        />)
+                    })
+                }
             </div>
             <button
                 className='

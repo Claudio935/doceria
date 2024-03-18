@@ -1,11 +1,12 @@
 
 import { shallowEqual, useSelector } from 'react-redux';
-import Card from './Card';
+import Card from './card';
 import { CartState } from '../../menu/types/types';
 
 
 const Section = () => {
     const cart = useSelector((state: CartState) => state.cart, shallowEqual)
+
     const category = Object.keys(cart)
 
     return (

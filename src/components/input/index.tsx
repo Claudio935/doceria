@@ -34,7 +34,6 @@ export const Input: React.FC<InputProps> = ({
     w-full 
     text-start
     font-bold
-    mb-[8px]
     `
     return (
         <div className='h-[140px] w-full flex flex-col gap-[8px]'>
