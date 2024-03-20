@@ -30,9 +30,10 @@ const Footer = () => {
              gap-8 '>
                     <div className='flex flex-col justify-center items-center gap-2'>
                         <h1 className='
-            text-[#3BBEBF]
+            text-slate-800
             font-dancing 
-            font-bold 
+            font-bold
+            shadow-sm 
             text-4xl'>Redes Sociais</h1>
                         <div className='flex flex-row items-center justify-start gap-2'>
                             <img src={instagram} className='h-5 w-5 ' />
@@ -45,7 +46,8 @@ const Footer = () => {
                     </div>
                     <div className='flex flex-col items-center justify-center gap-2'>
                         <h1 className='
-           text-[#3BBEBF]
+           text-slate-800
+           shadow-sm
             font-dancing 
             font-bold 
             text-4xl'>Endereço:</h1>

@@ -32,7 +32,7 @@ bg-[url('../src/assets/image/fundoCardapio.png')]
                 text-center 
                 mb-5 w-full 
                 text-white 
-                md:text-black">Cardápio</h1>
+                md:text-black">Nikki Confeitaria</h1>
                 <div className='flex flex-col justify-evenly items-center w-full'>
                     <h2 className="
                     text-2xl 

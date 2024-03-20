@@ -130,17 +130,7 @@ const Navbar = () => {
                                 dark:bg-gray-800 
                                 md:dark:bg-gray-900 
                                 dark:border-gray-700">
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="
-                                        block
-                                        py-2 
-                                        pl-3 
-                                        pr-4 
-                                        text-red-400 
-                                        hover:text-blue-400">inicío</a>
-                                    </li>
+
                                     <li>
                                         <a
                                             href="#menu"
@@ -151,6 +141,17 @@ const Navbar = () => {
                                         pr-4  
                                         text-red-400 
                                         hover:text-blue-400">Cardápio</a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="#fale-conosco"
+                                            className="
+                                        block
+                                        py-2 
+                                        pl-3 
+                                        pr-4 
+                                        text-red-400 
+                                        hover:text-blue-400">Fale Conosco</a>
                                     </li>
                                     <li>
                                         <a

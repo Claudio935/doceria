@@ -1,10 +1,11 @@
 import React from 'react';
-import Header from './header';
+
 import Menu from './menu';
 import Navbar from '../../components/navbar';
 import Feedback from './feedback';
 import CardProduct from './card';
 import Footer from './footer';
+import FaleConosco from './faleConosco';
 
 
 
@@ -20,17 +21,19 @@ const Home = () => {
         <div className='pt-20 bg-no-repeat bg-cover bg-center w-full '>
             <Navbar />
             <div className='grid grid-cols-1 gap-28'>
-                <div className='md:px-20 px-10 mt-[20px]'>
-                    <Header />
+                <div id="menu" className='md:px-20 px-10 mt-[20px]'>
+
+                    <Menu />
                 </div>
                 <div className='md:px-20 px-10'>
                     <h1 className='font-bold text-5xl  font-dancing text-center mb-5'>
                         Os mais vendidos!</h1>
                     <CardProduct />
                 </div>
-                <div id="menu" className='md:px-20 px-10 '>
 
-                    <Menu />
+
+                <div className='md:px-20 px-10 ' id="fale-conosco">
+                    <FaleConosco />
                 </div>
                 <div id="feedback" >
                     <h1

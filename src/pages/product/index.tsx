@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { db, storage } from '../../utils/data/firebase/config';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
-import { CartState, productFormData } from '../menu/types/types';
+import { Store, productFormData } from '../menu/types/types';
 import { calcNewPrice } from '../../utils/functions/convetFunctions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { addCart } from '../../store/cart';
@@ -39,7 +39,7 @@ const ProductPage = () => {
 
 
 
-    const cart = useSelector((state: CartState) => state, shallowEqual)
+    const cart = useSelector((state: Store) => state.cart, shallowEqual)
 
 
     const navigation = useNavigate()
@@ -89,13 +89,19 @@ const ProductPage = () => {
         w-full 
         bg-red-500 
         flex-1
-        lg:h-screen ${loading ? '' : 'pt-[80px]'}`}>
+        pt-[120px]
+        px-[40px]
+        pb-[80px]
+        md:px-0
+        md:py-0
+        min-h-screen 
+        items-center `}>
             <Navbar />
             {loading ?
                 <Loading /> :
                 <>
                     <div
-                        className='h-full w-full flex justify-center items-center  '>
+                        className='h-full w-full flex justify-center items-center '>
                         {dataProduct?.image &&
                             <img
                                 src={dataProduct.image}
@@ -105,12 +111,18 @@ const ProductPage = () => {
                         className='
             flex 
             flex-col  
-            items-center 
-            gap-2 
+            items-center
+            justify-center
+            gap-2
+            h-full
             text-white
-            p-20'>
-                        <h1 className='text-3xl font-dancing '>{dataProduct?.titleProduct}</h1>
-                        <h3 className='text-1xl '>{dataProduct?.description}</h3>
+            '>
+                        <h1
+                            className='
+                        text-3xl 
+                        font-dancing mt-10 md:mt-0 '>
+                            {dataProduct?.titleProduct}</h1>
+                        <h3 className='text-1xl px-10 text-justify'>{dataProduct?.description}</h3>
                         <p className='font-bold'>
                             {calcNewPrice(quantifyProduct, dataProduct?.price)}</p>
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CartState, StateOpenModal } from '../types/types'
+import { StateOpenModal, Store } from '../types/types'
 import { convertNumberToReal } from '../../../utils/functions/convetFunctions'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { addCart } from '../../../store/cart'
@@ -12,7 +12,7 @@ type DataOpenModa = {
 }
 
 const ModalMenuProduct = ({ dataModal, open, onClose }: DataOpenModa) => {
-    const cart = useSelector((state: CartState) => state, shallowEqual)
+    const cart = useSelector((state: Store) => state.cart, shallowEqual)
 
     const { price, titleProduct, category, id, image, description } = dataModal
     const navigation = useNavigate()
