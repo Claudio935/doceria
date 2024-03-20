@@ -59,7 +59,7 @@ const FormProduto: React.FC<FormProdutoProps> = ({ handleAddProduct }) => {
 
     }
     const onSubmit: SubmitHandler<productFormData> = async (product) => {
-        console.log(product.description)
+
         handleAddProduct(product, image ? image : null)
 
     }

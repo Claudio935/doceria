@@ -78,7 +78,6 @@ const FormCart = () => {
         const cartKeys = Object.keys(cart)
 
         if (cartKeys.length === 0) {
-            console.log(cart)
             dispatch(openModal('Não existe nenhum produto no carrinho!'))
             return
         }

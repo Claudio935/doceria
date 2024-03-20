@@ -126,8 +126,6 @@ export const useProductData = ({ numberOfProduct, order, sortBy }: CartHook) => 
 
         const storageRef = ref(storage, `image/${id}`);
         try {
-            const imageCompressed = compressorImage(file).then((result) => { return result })
-            console.log(imageCompressed)
             await uploadBytes(storageRef, await compressorImage(file))
         }
         catch (error) {
@@ -185,7 +183,7 @@ export const useProductData = ({ numberOfProduct, order, sortBy }: CartHook) => 
                 });
 
                 Promise.all(promises).then(() => {
-                    console.log(productArray)
+
                     setProductData(productArray);
 
                 });
@@ -287,8 +285,7 @@ export const useCommentData = ({ numberOfComment, order, sortBy }: CommentHook) 
 
         const storageRef = ref(storage, `avatarComment/${id}`);
         try {
-            const imageCompressed = compressorImage(file).then((result) => { return result })
-            console.log(imageCompressed)
+
             await uploadBytes(storageRef, await compressorImage(file))
         }
         catch (error) {
@@ -346,7 +343,6 @@ export const useCommentData = ({ numberOfComment, order, sortBy }: CommentHook) 
                 });
 
                 Promise.all(promises).then(() => {
-                    console.log(commentArray)
                     setCommentData(commentArray);
 
                 });

@@ -14,8 +14,6 @@ const Card = ({ categoryValues }: Props) => {
 
     const { cart } = useSelector((state: Store) => state, shallowEqual)
 
-    console.log(categoryValues)
-
     const dispatch = useDispatch()
 
     const handleIncrement = (id: string) => {

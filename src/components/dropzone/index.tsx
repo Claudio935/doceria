@@ -31,9 +31,7 @@ export const DropZone = ({ handleChange }: Props) => {
         setImage(null)
 
     }
-    useEffect(() => {
-        console.log(fileInputRef?.current?.value)
-    }, [fileInputRef?.current?.value])
+
     return (
         <div
             className='flex items-center justify-center w-full min-full h-full'>
