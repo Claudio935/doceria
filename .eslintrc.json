@@ -9,7 +9,8 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier" 
+        "prettier" ,
+        "next"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -31,8 +32,9 @@
         "quotes": ["error", "single"],
         "no-duplicate-imports": "error",
         "max-len": [ "warn", { "code": 100, "ignoreComments": true, "ignoreUrls": true } ],
-        "react/prop-types": 0
-          
+        "react/prop-types": 0,
+        "react/no-unescaped-entities": "off",
+        "@next/next/no-page-custom-font": "off" 
     },
     "settings": {
         "import/resolver": {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 
 type Props = {
@@ -83,7 +83,6 @@ export const DropZone = ({ handleChange }: Props) => {
                             <span
                                 className='font-semibold '>Click para fazer Uplado da imagem
                             </span > ou puxe a imagem aqui</p>
-
 
                         :
                         <>
