@@ -19,6 +19,7 @@ interface ContatoForm {
     email: string
     telefone: string
     data: string
+    hora: string
 }
 
 const FormCart = () => {
@@ -56,7 +57,8 @@ const FormCart = () => {
             invalid_type_error: 'valor deve ser um numero inteiro',
         }).regex(/^9?\d{4}-?\d{4}$/,
             'Número de telefone inválido, deve ser retirado o código do pais e o de área'),
-        data: z.string().min(1, { message: 'valor de data é requerido!' })
+        data: z.coerce.date().min(new Date(), { message: 'Too young!' }),
+        hora: z.string().min(1, { message: 'valor de data é requerido!' })
     })
     const { register, handleSubmit, formState: { errors } } =
 
@@ -85,7 +87,7 @@ const FormCart = () => {
         const dataEncomenda = contato.data;
         const dataEncomendaFormated = dataEncomenda.split('-').reverse().join('/');
         // eslint-disable-next-line max-len
-        let msg = `nome: ${contato.nome}%0Dbairro: ${contato.bairro}%0Dcep: ${contato.cep}%0Demail: ${contato.email}%0DTelefone: ${contato.telefone}%0DData da encomenda: ${dataEncomendaFormated}%0Dencomenda:`
+        let msg = `nome: ${contato.nome}%0Dbairro: ${contato.bairro}%0Dcep: ${contato.cep}%0Demail: ${contato.email}%0DTelefone: ${contato.telefone}%0DData da encomenda: ${dataEncomendaFormated} ás ${contato.hora} %0Dencomenda:`
 
         // eslint-disable-next-line max-len
         cartKeys.forEach((key) => {
@@ -161,13 +163,21 @@ const FormCart = () => {
                     register={register('telefone')}
                     error={errors?.telefone?.message}
                 />
-                <Input
-                    label='Data da encomenda'
-                    register={register('data')}
-                    error={errors?.data?.message}
-                    type='date'
-                />
-
+                <div className='flex flex-row w-full gap-2'>
+                    <Input
+                        label='Data da encomenda'
+                        register={register('data')}
+                        error={errors?.data?.message}
+                        min=''
+                        type='date'
+                    />
+                    <Input
+                        label='Horário'
+                        register={register('hora')}
+                        error={errors?.hora?.message}
+                        type='time'
+                    />
+                </div>
                 <button
                     type={'submit'}
                     className='
