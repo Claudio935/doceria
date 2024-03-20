@@ -1,4 +1,3 @@
-
 import { shallowEqual, useSelector } from 'react-redux';
 import Card from './card';
 import { CartState } from '../../menu/types/types';
